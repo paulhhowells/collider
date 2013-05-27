@@ -1,7 +1,10 @@
 collider
 ========
+version 0.1
 
 Discover which particles are in collision with a pair of cartesian coordinates.
+
+
 
 ## how to use
 1. create a new collider object:
