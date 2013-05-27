@@ -182,6 +182,7 @@ collider = function () {
       if (!y && typeof x === "object") {
         y = arguments[0].y;
         x = arguments[0].x;
+        particle_key_flag = arguments[0].particle_key_flag;
       }
 
       // return an array

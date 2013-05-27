@@ -43,4 +43,4 @@ Discover which particles are in collision with a pair of cartesian coordinates.
 * particles are currently rectangular, but are planned to also be circular and hexagonal
 
 ## design notes
-* the look up table could be removed if only a few particles were known to need to be iterated through, but for larger numbers (and assuming that most of the particles are not clustered into one tight space) the LUT creates a shortlist (based on a rectangle) for testing.
+* the look up table could be removed if only a few particles were known to need to be iterated through, but for larger numbers (and assuming that most of the particles are not clustered into one tight space) the LUT creates a shortlist for testing.
