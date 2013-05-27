@@ -29,9 +29,7 @@
  * better documentation / comments
 */
 
-var phh = phh || {};
-
-phh.collider = function () {
+collider = function () {
   // v.0.1
   //
   // public methods:
