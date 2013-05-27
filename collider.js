@@ -21,6 +21,7 @@
     int - integer
     num - number
 */
+
 /* to do:
  *
  * remove unneeded properties & methods, ie setting size of map
