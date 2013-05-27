@@ -28,6 +28,7 @@
  * move a particle
  * circular and hexagonal particle types
  * better documentation / comments
+ * add an argument to return the id key string, rather than the particle object
 */
 
 collider = function () {
@@ -162,9 +163,13 @@ collider = function () {
 
       return this.particles[id_str]; // return id string, or reference to object?
     },
-    collision : function (x, y) {
+    collision : function (x, y, particle_key_flag) {
       // arguments:
       //   x and y coordinates, or a single object containing them {x : x, y : y}
+      //   particle_key_flag, 
+      //     only return a hash object containing the particle id as a key
+      //     otherwise, the returned object contains the particle object
+      //
       // returns:
       //   a hash object of collided particle objects, or false if none have occurred
 
@@ -197,7 +202,13 @@ collider = function () {
       for (id_key in lut_collisions_obj) {
         if(lut_collisions_obj.hasOwnProperty(id_key)) {
           if (this.particles[id_key].collision(x, y)) {
-            collisions[id_key] = this.particles[id_key];
+          	if (particle_key_flag) {
+          		// return just the key in the hash object
+	          	collisions[id_key] = true;
+          	} else {
+	          	// is false or undefined, so return particle object
+	          	collisions[id_key] = this.particles[id_key];	
+          	}
             collided = true;
           }
         }
