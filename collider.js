@@ -151,7 +151,6 @@ collider = function () {
           options = id_str;
           id_str = (options && options.id) ? options.id : q.newId();
         }
-
       }
 
       width = (options && options.width) ? options.width : 0;
@@ -204,7 +203,6 @@ collider = function () {
         }
       }
       return collided ? collisions : false;
-
     },
     particles : {}
   };
