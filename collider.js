@@ -32,7 +32,7 @@
 */
 
 collider = function () {
-  // v.0.1
+  // v.0.2
   //
   // public methods:
   //  register()
@@ -211,24 +211,28 @@ collider = function () {
       // // returns an array of particle objects
       // return (collisions.length === 0) ? false : collisions;
 
-      // return an object (or false)
-      lut_collisions_obj = q.lut[x][y];
-      for (id_key in lut_collisions_obj) {
-        if(lut_collisions_obj.hasOwnProperty(id_key)) {
-
-          // now test more precisely
-          if (this.particles[id_key].collision(x, y)) {
-            if (particle_key_flag) {
-              // return just the key in the hash object
-              collisions[id_key] = true;
-            } else {
-              // is false or undefined, so return particle object
-              collisions[id_key] = this.particles[id_key];
-            }
-            collided = true;
-          }
-        }
-      }
+      // check that LUT array contains indices before attempting to read them
+			if ((q.lut[x]) && (q.lut[x][y])) {
+				
+				// return an object (or false)
+	      lut_collisions_obj = q.lut[x][y];
+	      for (id_key in lut_collisions_obj) {
+	        if(lut_collisions_obj.hasOwnProperty(id_key)) {
+	
+	          // now test more precisely
+	          if (this.particles[id_key].collision(x, y)) {
+	            if (particle_key_flag) {
+	              // return just the key in the hash object
+	              collisions[id_key] = true;
+	            } else {
+	              // is false or undefined, so return particle object
+	              collisions[id_key] = this.particles[id_key];
+	            }
+	            collided = true;
+	          }
+	        }
+	      }
+	    }
       return collided ? collisions : false;
     },
     particles : {}
