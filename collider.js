@@ -146,6 +146,7 @@ collider = function () {
             options = x;
             x = options.x || 0;
             y = options.y || 0;
+            id_str = options.id || id_str;
           }
         } else if (!(typeof id_str === 'string')) {
           // then id_str (as the 3rd argument) is probably options
@@ -163,10 +164,22 @@ collider = function () {
 
       return this.particles[id_str]; // return id string, or reference to object?
     },
-    collision : function (x, y, particle_key_flag) {
+    set : function (id_str, options) {
+
+
+
+    },
+    clear : function () {
+      this.particles = {};
+      q.lut = [];
+      q.id_int = 0;
+
+      // return this; // chaining?
+    },
+    collisionTest : function (x, y, particle_key_flag) {
       // arguments:
       //   x and y coordinates, or a single object containing them {x : x, y : y}
-      //   particle_key_flag, 
+      //   particle_key_flag,
       //     only return a hash object containing the particle id as a key
       //     otherwise, the returned object contains the particle object
       //
@@ -202,14 +215,16 @@ collider = function () {
       lut_collisions_obj = q.lut[x][y];
       for (id_key in lut_collisions_obj) {
         if(lut_collisions_obj.hasOwnProperty(id_key)) {
+
+          // now test more precisely
           if (this.particles[id_key].collision(x, y)) {
-          	if (particle_key_flag) {
-          		// return just the key in the hash object
-	          	collisions[id_key] = true;
-          	} else {
-	          	// is false or undefined, so return particle object
-	          	collisions[id_key] = this.particles[id_key];	
-          	}
+            if (particle_key_flag) {
+              // return just the key in the hash object
+              collisions[id_key] = true;
+            } else {
+              // is false or undefined, so return particle object
+              collisions[id_key] = this.particles[id_key];
+            }
             collided = true;
           }
         }
